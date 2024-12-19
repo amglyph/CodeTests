@@ -1,10 +1,10 @@
 ﻿namespace HotelReservationLibrary
 {
-    internal class ReservationObjectValidationService
+    public class ReservationObjectValidationService
     {
         ReservationObjectValidationState reservationObjectValidationState { get; set; } = ReservationObjectValidationState.NotValidated;
 
-        internal bool IsReservationObjectValid(Reservation reservation)
+        public bool IsReservationObjectValid(Reservation reservation)
         {
             if (reservation == null)
             {
@@ -36,9 +36,9 @@
                 return false;
             }
 
-            if (reservation.NumberOfAdditionalGuests > 2)
+            if (reservation.NumberOfAdditionalGuests > 2 || reservation.NumberOfAdditionalGuests < 0)
             {
-                reservationObjectValidationState = ReservationObjectValidationState.TooManyGuests;
+                reservationObjectValidationState = ReservationObjectValidationState.InvalidAdditionalGuests;
                 return false;
             }
 

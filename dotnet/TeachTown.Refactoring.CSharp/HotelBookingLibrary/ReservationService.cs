@@ -8,9 +8,14 @@
             var reservationObjectValidationService = new ReservationObjectValidationService();
             var reservationPriceService = new ReservationPriceService();
 
+            if (!reservationObjectValidationService.IsReservationObjectValid(reservation))
+            {
+                return 0;
+            }
+
             var room = reservationRoomAvailabilityService.GetAvailableRoom(reservation);
 
-            if (room == null || !reservationObjectValidationService.IsReservationObjectValid(reservation))
+            if (room == null)
             {
                 return 0;
             }

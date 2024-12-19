@@ -1,8 +1,8 @@
 ﻿namespace HotelReservationLibrary
 {
-    internal class ReservationPriceService
+    public class ReservationPriceService
     {
-        internal double GetReservationPrice(Reservation reservation, Room? room)
+        public double GetReservationPrice(Reservation reservation, Room? room)
         {
             if (reservation == null || room == null) return 0;
 

@@ -1,15 +1,15 @@
 ﻿namespace HotelReservationLibrary
 {
-    internal class ReservationWeatherService
+    public class ReservationWeatherService
     {
         private IWeatherApi weatherApi;
 
-        internal ReservationWeatherService(IWeatherApi weatherApi)
+        public ReservationWeatherService(IWeatherApi weatherApi)
         {
             this.weatherApi = weatherApi;
         }
 
-        internal double AdverseWeatherMultiplier(Reservation reservation)
+        public double AdverseWeatherMultiplier(Reservation reservation)
         {
             var multiplier = 1.0;
 
