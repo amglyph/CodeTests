@@ -15,7 +15,7 @@
                 return 0;
             }
 
-            reservationPriceService.UpdateReservationPrice(reservation, room);
+            reservation.Total = reservationPriceService.GetReservationPrice(reservation, room);
 
             return ReservationDb.AddReservation(reservation);
         }

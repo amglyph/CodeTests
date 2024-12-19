@@ -2,27 +2,38 @@
 {
     internal class ReservationWeatherService
     {
+        private IWeatherApi weatherApi;
+
+        internal ReservationWeatherService(IWeatherApi weatherApi)
+        {
+            this.weatherApi = weatherApi;
+        }
+
         internal double AdverseWeatherMultiplier(Reservation reservation)
         {
-            var weatherService = new ExternalWeatherApi();
+            var multiplier = 1.0;
 
             try
             {
-                var forecast = weatherService.GetForecast(DateOnly.FromDateTime(reservation.CheckInDate), DateOnly.FromDateTime(reservation.CheckOutDate));
+                var forecast = weatherApi.GetForecast(DateOnly.FromDateTime(reservation.CheckInDate), DateOnly.FromDateTime(reservation.CheckOutDate));
 
                 switch (forecast.Summary)
                 {
                     case "Freezing":
                     case "Sweltering":
-                        return 1.2;
+                        multiplier = 1.2;
+                        break;
                     default:
-                        return 1.0;
+                        multiplier = 1.0;
+                        break;
                 }
             }
             catch (Exception ex)
             {
-                return 1.0;
+                // Add logging or other error handling here.
             }
+
+            return multiplier;
         }
     }
 }

@@ -2,11 +2,13 @@
 {
     internal class ReservationPriceService
     {
-        internal void UpdateReservationPrice(Reservation reservation, Room? room)
+        internal double GetReservationPrice(Reservation reservation, Room? room)
         {
-            if (reservation == null || room == null) return;
+            if (reservation == null || room == null) return 0;
 
-            var reservationWeatherService = new ReservationWeatherService();
+            var weatherApi = new ExternalWeatherApi();
+            var reservationWeatherService = new ReservationWeatherService(weatherApi);
+
             var pricePerNight = room.PricePerNight;
 
             if (reservation.SmokingOrNonSmoking == "Smoking")
@@ -14,7 +16,7 @@
                 pricePerNight *= 1.05;
             }
 
-            reservation.Total = pricePerNight * (reservation.CheckOutDate - reservation.CheckInDate).Days * reservationWeatherService.AdverseWeatherMultiplier(reservation);
+            return pricePerNight * (reservation.CheckOutDate - reservation.CheckInDate).Days * reservationWeatherService.AdverseWeatherMultiplier(reservation);
         }
     }
 }

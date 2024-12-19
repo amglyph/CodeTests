@@ -8,6 +8,7 @@ syntax: glob
 *.psess
 *.vspx
 *.csproj.user
+*.slnLaunch.user
 *.log
 bin
 obj
