@@ -1,11 +1,12 @@
 ﻿namespace HotelReservationLibrary
 {
-    internal static class ReservationPriceService
+    internal class ReservationPriceService
     {
-        internal static void UpdateReservationPrice(Reservation reservation, Room? room)
+        internal void UpdateReservationPrice(Reservation reservation, Room? room)
         {
             if (reservation == null || room == null) return;
 
+            var reservationWeatherService = new ReservationWeatherService();
             var pricePerNight = room.PricePerNight;
 
             if (reservation.SmokingOrNonSmoking == "Smoking")
@@ -13,7 +14,7 @@
                 pricePerNight *= 1.05;
             }
 
-            reservation.Total = pricePerNight * (reservation.CheckOutDate - reservation.CheckInDate).Days * ReservationWeatherService.AdverseWeatherMultiplier(reservation);
+            reservation.Total = pricePerNight * (reservation.CheckOutDate - reservation.CheckInDate).Days * reservationWeatherService.AdverseWeatherMultiplier(reservation);
         }
     }
 }

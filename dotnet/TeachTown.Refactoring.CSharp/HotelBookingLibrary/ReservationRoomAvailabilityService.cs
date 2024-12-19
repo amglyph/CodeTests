@@ -1,8 +1,8 @@
 ﻿namespace HotelReservationLibrary
 {
-    internal static class ReservationRoomAvailabilityService
+    internal class ReservationRoomAvailabilityService
     {
-        internal static Room? GetAvailableRoom(Reservation reservation)
+        internal Room? GetAvailableRoom(Reservation reservation)
         {
             var rooms = new List<Room>()
             {

@@ -1,8 +1,8 @@
 ﻿namespace HotelReservationLibrary
 {
-    internal static class ReservationWeatherService
+    internal class ReservationWeatherService
     {
-        internal static double AdverseWeatherMultiplier(Reservation reservation)
+        internal double AdverseWeatherMultiplier(Reservation reservation)
         {
             var weatherService = new ExternalWeatherApi();
 

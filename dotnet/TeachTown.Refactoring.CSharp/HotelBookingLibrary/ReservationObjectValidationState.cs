@@ -2,6 +2,6 @@
 {
     public enum ReservationObjectValidationState
     {
-        Valid, Null, FirstNameMissing, LastNameMissing, InvalidEmail, InvalidDateRange, TooManyGuests
+        NotValidated, Valid, Null, FirstNameMissing, LastNameMissing, InvalidEmail, InvalidDateRange, TooManyGuests
     }
 }

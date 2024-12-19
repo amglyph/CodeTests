@@ -4,14 +4,18 @@
     {
         public long BookReservation(Reservation reservation)
         {
-            var room = ReservationRoomAvailabilityService.GetAvailableRoom(reservation);
+            var reservationRoomAvailabilityService = new ReservationRoomAvailabilityService();
+            var reservationObjectValidationService = new ReservationObjectValidationService();
+            var reservationPriceService = new ReservationPriceService();
 
-            if (room == null || ReservationValidationService.ValidateReservation(reservation) != ReservationObjectValidationState.Valid)
+            var room = reservationRoomAvailabilityService.GetAvailableRoom(reservation);
+
+            if (room == null || !reservationObjectValidationService.IsReservationObjectValid(reservation))
             {
                 return 0;
             }
 
-            ReservationPriceService.UpdateReservationPrice(reservation, room);
+            reservationPriceService.UpdateReservationPrice(reservation, room);
 
             return ReservationDb.AddReservation(reservation);
         }
