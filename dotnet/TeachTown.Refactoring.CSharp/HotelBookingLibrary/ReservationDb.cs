@@ -6,7 +6,7 @@ namespace HotelReservationLibrary
     {
         public static long AddReservation(Reservation reservation)
         {
-            using (var connection = new SqlConnection("ConnectionString"))
+            using (var connection = new SqlConnection("data source=Dog\\SQLEXPRESS;initial catalog=master;trusted_connection=true;TrustServerCertificate=True"))
             {
                 connection.Open();
                 // Add reservation to database
@@ -28,6 +28,4 @@ namespace HotelReservationLibrary
             return DateTime.Now.Ticks;
         }
     }
-
-    
 }

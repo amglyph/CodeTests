@@ -1,0 +1,6 @@
+- Move `reservation` validation to `ReservationValidationService` with an enum for validation states. This makes error states clearer and more easily expandable. This also allows validation to be offloaded to a different system.
+- Remove redundant date range check. The email address check could probably also be more robust, but I decided not to go down that rabbit hole for this exercise.
+- Add `Room` class, and initialize list of existing rooms in `ReservationRoomAvailabilityService`. Normally, the list of rooms would probably live in another DB table, but I manually created the list in the code for simplicity. Other room attributes can easily be added to the class, and the availability service could be expanded to return individually-available rooms.
+- Move price calculation to `ReservationPriceService`. This could later interface with a payment collection service.
+- Move weather check to `ReservationWeatherService`. This makes it easier to add/modify multipliers in the future (for example, 1.5 multiplier for scorching conditions).
+- Include null `reservation` in the default error response of 0. This is debatable. Ideally, a program should fail gracefully, and given the limitations of the problem statement, I can only return some agreed-upon error value. Given more leeway, I would expand the return object to include status codes and other information.
